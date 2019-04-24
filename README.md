@@ -138,7 +138,7 @@ To view ATP instance details:
 
 
 
-Finally to destry the ATP instance
+Finally to destroy the ATP instance
 `terraform destroy`
 
 
