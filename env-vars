@@ -1,0 +1,21 @@
+### Authentication details
+#Update below variables with ocids for your trial account
+export TF_VAR_tenancy_ocid="ocid1.tenancy.oc1.bba...................a"
+export TF_VAR_user_ocid="ocid1.user.oc1..a....................q"
+export TF_VAR_fingerprint="ae:................:1a"
+export TF_VAR_private_key_path="~/api-keys/oci_api_key.pem"
+
+### Region
+#change this if your account is in a different region
+export TF_VAR_region=us-ashburn-1
+
+### Compartment
+#Here I am using the root compartment, thought this is not the recommended approach
+export TF_VAR_compartment_ocid="ocid1.tenancy.oc1..aaa....................................a"
+
+### API Keys - Public/private keys used on the instance 
+export TF_VAR_ssh_public_key=$(cat ~/ssh-keys/id_rsa.pub)
+export TF_VAR_ssh_private_key=$(cat ~/ssh-keys/id_rsa)
+## NOTE: These are not your api keys. More info on the right keys see
+## https://docs.us-phoenix-1.oraclecloud.com/Content/Compute/Tasks/managingkeypairs.htm
+
