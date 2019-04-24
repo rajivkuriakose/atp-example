@@ -59,6 +59,16 @@ Add the key under user 2) > API Keys section
 `cat oci_api_key_public.pem` 
 And add the content of above file as API Key.
 
+## Upload ssh keys from Windows box to OCI compute instance
+Open Git Bash from Windows
+cd .ssh
+
+upload id_rsa and id_rsa.pub files using scp
+
+`scp -i id_rsa id_rsa* opc@OCI_COMPUTE_INSTANCE_PUBLIC_IP:~/`
+
+Above step will upload id_rsa and id_rsa.pub to oci compute host. Replace OCI_COMPUTE_INSTANCE_PUBLIC_IP with the public IP address of the oci compute instance.
+
 ## Install terraform and terraform oci provider
 
 `sudo yum install -y terraform terraform-provider-oci`
