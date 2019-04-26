@@ -1,4 +1,4 @@
-# How to create oracle Automomous Database using Terraform
+# How to create oracle Autonomous Database using Terraform
 
 ## Generate ssh key pair
 
