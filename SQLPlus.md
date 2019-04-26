@@ -56,10 +56,23 @@ sudo yum install -y  oracle-instantclient18.3-basic.x86_64 oracle-instantclient1
 Now sqlplus binary is available under /usr/lib/oracle/18.3/client64/bin
 
 ### Download and unzip wallet zip file
-TBD
+
+Since I have created ATP instance using terraform, from this OCI compute instance, the wallet zip file is already available under "/home/opc/atp-example/autonomous_database_wallet.zip"
+
+cd /home/opc/atp-example/
+unzip autonomous_database_wallet.zip
+cd autonomous_database_wallet
+
+### Download Wallet zip from Service Console
+Otherwise you need to login to ATP Instance's Service Console. Default user name is "admin". 
+After login, go to Administration link on left side. And click "Download Client Credentials (Wallet)"
+
+Provide a wallet password to download the wallet zip file.  Now this client credentials (wallet) can used to login from SQL Developer and other sql clients liek SQL Plus.
+If you have downloaded the zip from windows, you would need to scp the file to OCI compute host.
+
 
 ### point TNS_ADMIN env var to wallet locaton
-
+export TNS_ADMIN=/etc/ORACLE/WALLETS/ATPDB2
 export | grep TNS
  #declare -x TNS_ADMIN="/home/opc/ATPJava/wallet_DB/"
 
