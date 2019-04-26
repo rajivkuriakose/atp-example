@@ -60,25 +60,50 @@ Now sqlplus binary is available under /usr/lib/oracle/18.3/client64/bin
 Since I have created ATP instance using terraform, from this OCI compute instance, the wallet zip file is already available under "/home/opc/atp-example/autonomous_database_wallet.zip"
 
 cd /home/opc/atp-example/
-unzip autonomous_database_wallet.zip
-cd autonomous_database_wallet
 
-### Download Wallet zip from Service Console
+ jar -tvf /home/opc/atp-example/autonomous_database_wallet.zip
+  6661 Fri Apr 12 13:53:16 GMT 2019 cwallet.sso
+  3422 Fri Apr 12 13:53:16 GMT 2019 tnsnames.ora
+  3336 Fri Apr 12 13:53:16 GMT 2019 truststore.jks
+    87 Fri Apr 12 13:53:16 GMT 2019 ojdbc.properties
+   114 Fri Apr 12 13:53:16 GMT 2019 sqlnet.ora
+  6616 Fri Apr 12 13:53:16 GMT 2019 ewallet.p12
+  3243 Fri Apr 12 13:53:16 GMT 2019 keystore.jks
+  
+  ### Download Wallet zip from Service Console
 Otherwise you need to login to ATP Instance's Service Console. Default user name is "admin". 
 After login, go to Administration link on left side. And click "Download Client Credentials (Wallet)"
 
-Provide a wallet password to download the wallet zip file.  Now this client credentials (wallet) can used to login from SQL Developer and other sql clients liek SQL Plus.
-If you have downloaded the zip from windows, you would need to scp the file to OCI compute host.
+Provide a wallet password to download the wallet zip file.  Now this client credentials (wallet) can used to login from SQL Developer and other sql clients liek SQL Plus. If you have downloaded the zip from windows, you would need to scp the file to OCI compute host.
 
+Once the wallet zip is present on oci compute host, continue with below steps.
 
-### point TNS_ADMIN env var to wallet locaton
-export TNS_ADMIN=/etc/ORACLE/WALLETS/ATPDB2
-export | grep TNS
- #declare -x TNS_ADMIN="/home/opc/ATPJava/wallet_DB/"
+## Unzip wallet archive
+unzip autonomous_database_wallet.zip
+cd autonomous_database_wallet
+
+### Modify sqlnet.ora 
+Modify sqlnet.oraand give path to walet folder as "/home/opc/atp-example/autonomous_database_wallet"
+
+Here is 
+```cat /home/opc/atp-example/autonomous_database_wallet/sqlnet.ora```
+WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="/home/opc/atp-example/autonomous_database_wallet")))
+SSL_SERVER_DN_MATCH=yes
+
+OR set TNS_ADMIN variable to point to wallet folder. And Modify sqlnet.ora
+And give DIRECTORU=$TNS_ADMIN
+
+cat /etc/ORACLE/WALLETS/ATPDB2/sqlnet.ora
+WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="$TNS_ADMIN")))
+SSL_SERVER_DN_MATCH=yes
+
+#Now export TND_ADMIN variable to point to wallet folder
+export TNS_ADMIN=/home/opc/atp-example/autonomous_database_wallet
+
 
 #wallet zip is extracted and TNS_ADMIN env var pointing to the wallet folder.
-
 Refer https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-sqlplus.html#GUID-A3005A6E-9ECF-40CB-8EFC-D1CFF664EC5A
+
 
 ### Connect to ATP instane using SQL Plus
 
