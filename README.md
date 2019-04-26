@@ -75,7 +75,7 @@ Above step will upload id_rsa and id_rsa.pub to oci compute host. Replace OCI_CO
 
 ## Clone atp-example github repo
 
-`git clone <TBD>`
+`git clone https://github.com/rajivkuriakose/atp-example.git`
 
 
 ## Prepare env vars 
