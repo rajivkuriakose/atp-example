@@ -1,8 +1,8 @@
 ### Authentication details
 #Update below variables with ocids for your trial account
-export TF_VAR_tenancy_ocid="ocid1.tenancy.oc1.bba...................a"
-export TF_VAR_user_ocid="ocid1.user.oc1..a....................q"
-export TF_VAR_fingerprint="ae:................:1a"
+export TF_VAR_tenancy_ocid="<renancy ocid here>"
+export TF_VAR_user_ocid="<user ocid here>"
+export TF_VAR_fingerprint="<fingerprint here>"
 export TF_VAR_private_key_path="~/api-keys/oci_api_key.pem"
 
 ### Region
@@ -11,7 +11,7 @@ export TF_VAR_region=us-ashburn-1
 
 ### Compartment
 #Here I am using the root compartment, thought this is not the recommended approach
-export TF_VAR_compartment_ocid="ocid1.tenancy.oc1..aaa....................................a"
+export TF_VAR_compartment_ocid="<compartment ocid here>"
 
 ### API Keys - Public/private keys used on the instance 
 export TF_VAR_ssh_public_key=$(cat ~/ssh-keys/id_rsa.pub)
